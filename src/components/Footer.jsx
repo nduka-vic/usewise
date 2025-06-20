@@ -38,7 +38,7 @@ const Footer = () => {
 
           {/* Waitlist Form */}
           {!submitted ? (
-            <div className="max-w-2xl mx-auto px-4 mt-10 sm:mt-12">
+            <div className="max-w-2xl mx-auto px-4 my-10 sm:mt-12">
               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
                 <input
                   type="email"

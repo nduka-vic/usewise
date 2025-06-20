@@ -19,21 +19,49 @@ const FormSection = () => {
   //     }
   //   };
 
+  //   const handleSubmit = async () => {
+  //     if (!email) return;
+
+  //     const { error } = await supabase.from("waitlist").insert([{ email }]);
+  //     console.log(error);
+  //     error && setError(error);
+
+  //     if (error) {
+  //       console.error("Submission error:", error.message);
+  //       // You can show an error toast or message here
+  //     } else {
+  //       console.log("setting submission");
+  //       dispatch(setSubmitted());
+  //       console.log("finsihed setting submission", submitted);
+  //       // Optional: show a success message or clear the input
+  //     }
+  //   };
+
   const handleSubmit = async () => {
     if (!email) return;
 
-    const { error } = await supabase.from("waitlist").insert([{ email }]);
-    console.log(error);
-    error && setError(error);
+    try {
+      const response = await fetch("/.netlify/functions/join-waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
 
-    if (error) {
-      console.error("Submission error:", error.message);
-      // You can show an error toast or message here
-    } else {
-      console.log("setting submission");
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error("Server error:", result.message);
+        // Optionally show error toast
+        return;
+      }
+
       dispatch(setSubmitted());
-      console.log("finsihed setting submission", submitted);
-      // Optional: show a success message or clear the input
+      // Optionally show success toast
+    } catch (err) {
+      console.error("Network error:", err.message);
+      // Optionally show error toast
     }
   };
 

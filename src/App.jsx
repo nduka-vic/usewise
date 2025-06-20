@@ -54,7 +54,7 @@ function App() {
       <HowItWorksSection />
       <FormSection />
       <LaunchTimelineSection />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -53,6 +53,7 @@ const FormSection = () => {
 
       if (!response.ok) {
         console.error("Server error:", result.message);
+        setError(result.message);
         // Optionally show error toast
         return;
       }
